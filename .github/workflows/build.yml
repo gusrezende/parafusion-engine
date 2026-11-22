@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        preset: [windows-debug, windows-release]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache das dependências do vcpkg
+        uses: actions/cache@v4
+        with:
+          path: build/${{ matrix.preset }}/vcpkg_installed
+          key: vcpkg-${{ matrix.preset }}-${{ hashFiles('vcpkg.json') }}
+
+      - name: Ambiente do MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configurar
+        shell: pwsh
+        run: |
+          $env:VCPKG_ROOT = $env:VCPKG_INSTALLATION_ROOT
+          cmake --preset ${{ matrix.preset }}
+
+      - name: Compilar
+        run: cmake --build --preset ${{ matrix.preset }}

@@ -1,0 +1,11 @@
+{
+  "name": "parafusers-engine",
+  "version-string": "0.1.0",
+  "description": "Parafusers Engine: engine de jogos 2D e 3D",
+  "dependencies": [
+    {
+      "name": "sdl3",
+      "features": ["vulkan"]
+    }
+  ]
+}
