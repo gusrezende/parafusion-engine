@@ -1,0 +1,16 @@
+# Build
+build/
+out/
+vcpkg_installed/
+
+# IDEs
+.vs/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.user
+CMakeUserPresets.json
+
+# Sistema
+Thumbs.db
+.DS_Store
